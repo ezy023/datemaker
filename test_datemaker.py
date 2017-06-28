@@ -4,7 +4,7 @@ import datetime
 from datemaker import datetime_from_string
 from datemaker import build_argument_parser
 from datemaker import datetimes_from_start_and_deltas
-from datemaker import parse_timedelta_string
+# from datemaker import parse_timedelta_string
 
 class TestDateMaker(unittest.TestCase):
 
@@ -37,8 +37,16 @@ class TestDateMaker(unittest.TestCase):
         args = parser.parse_args(arg_string.split())
         args_verbose = parser.parse_args(arg_string_verbose.split())
 
-        self.assertEquals(['+3'], args.deltas)
-        self.assertEquals(['+3'], args_verbose.deltas)
+        self.assertEquals([3], args.deltas)
+        self.assertEquals([3], args_verbose.deltas)
+
+    def test_arg_parser_negative_delta_args(self):
+        args_string = '--delta -11 -d -3 -d -4'
+        parser = build_argument_parser()
+        args = parser.parse_args(args_string.split())
+
+        self.assertEqual([-11, -3, -4], args.deltas)
+        # self.assertEqual(['+1d', '-3'], args.deltas)
 
 
     def test_arg_parser_parse_start_date(self):
@@ -54,7 +62,7 @@ class TestDateMaker(unittest.TestCase):
 
     def test_datetimes_from_start_and_deltas(self):
         start_date = datetime.datetime(year=2017, month=6, day=24)
-        deltas = ['1d']
+        deltas = [1]
 
         applied_deltas = datetimes_from_start_and_deltas(start_date, deltas)
 
@@ -66,7 +74,7 @@ class TestDateMaker(unittest.TestCase):
 
     def test_datetimes_from_start_and_deltas_multiple_deltas(self):
         start_date = datetime.datetime(year=2017, month=6, day=24)
-        deltas = ['1d', '-1d']
+        deltas = [1, -1]
 
         applied_deltas = datetimes_from_start_and_deltas(start_date, deltas)
 
@@ -81,19 +89,7 @@ class TestDateMaker(unittest.TestCase):
         self.assertEqual(23, applied_deltas[1].day)
 
 
-    def test_parse_timedelta_string_day(self):
-        delta_string = '12d'
-        delta_tuple = parse_timedelta_string(delta_string)
 
-        self.assertEqual('day', delta_tuple.magnitude)
-        self.assertEqual(12, delta_tuple.amount)
-
-    def test_parse_timedelta_string_week(self):
-        delta_string = '2w'
-        delta_tuple = parse_timedelta_string(delta_string)
-
-        self.assertEqual('week', delta_tuple.magnitude)
-        self.assertEqual(2, delta_tuple.amount)
 
 
 if __name__ == '__main__':
