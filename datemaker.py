@@ -55,8 +55,8 @@ def main_main(args):
     result_datetimes = datetimes_from_start_and_deltas(start_date, time_deltas)
     epochs = map(datetime_to_epoch, result_datetimes)
 
-    for ts in epochs:
-        print "%d" % ts
+    for idx, ts in enumerate(epochs):
+        print "%d: %d" % (time_deltas[idx], ts)
 
 
 def build_argument_parser():
