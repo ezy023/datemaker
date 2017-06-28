@@ -4,7 +4,6 @@ import datetime
 from datemaker import datetime_from_string
 from datemaker import build_argument_parser
 from datemaker import datetimes_from_start_and_deltas
-# from datemaker import parse_timedelta_string
 
 class TestDateMaker(unittest.TestCase):
 
@@ -46,7 +45,6 @@ class TestDateMaker(unittest.TestCase):
         args = parser.parse_args(args_string.split())
 
         self.assertEqual([-11, -3, -4], args.deltas)
-        # self.assertEqual(['+1d', '-3'], args.deltas)
 
 
     def test_arg_parser_parse_start_date(self):
@@ -87,8 +85,6 @@ class TestDateMaker(unittest.TestCase):
         self.assertEqual(2017, applied_deltas[1].year)
         self.assertEqual(6, applied_deltas[1].month)
         self.assertEqual(23, applied_deltas[1].day)
-
-
 
 
 
