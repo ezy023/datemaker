@@ -63,9 +63,9 @@ def build_argument_parser():
     parser = argparse.ArgumentParser(description="Make some epoch date ranges")
     parser.add_argument('--start', '-s', action='store', dest='start_date_string',
                             help='A string representing the date from which the deltas should be applied.\n' + \
-                            'Date should be in the format "' + EXP_DATETIME_STRING + '"\n\n' + \
+                            'Date can be in the format "' + EXP_DATE_STRING + '" or "' + EXP_DATETIME_STRING + '"\n\n' + \
                             'Defaults to current datetime if not specified')
-    parser.add_argument('--delta', '-d', action='append', type=int, dest='deltas',
+    parser.add_argument('--delta', '-d', action='append', metavar='DELTA', type=int, dest='deltas',
                             help='An integer representing a positive or negative amount of 24-hour periods to adjust *start* by')
 
     return parser
