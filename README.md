@@ -48,7 +48,7 @@ Copy the `datemaker.py` file to be named whatever, make it an executable, and pl
 ```
 $ cp datemaker.py dm
 $ chmod +x dm
-$ mv dm $HOME/bin
+$ mv dm $HOME/bin  # Assuming $HOME/bin is in your $PATH
 $ which dm
 >>> /home/username/bin/dm
 
